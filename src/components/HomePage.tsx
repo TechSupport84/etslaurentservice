@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';  // Import the CSS for toastify
 
 const HomePage: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,11 +20,20 @@ const HomePage: React.FC = () => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  const handlePost = ()=>{
-    toast.success("Coming soon...")
-  }
+  const handlePost = () => {
+    toast.success("Coming soon...");
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    toast.info("Votre demande a été envoyée ! (Simulé)");
+    closeModal();
+  };
+
   return (
     <div className="bg-white text-gray-800">
+      <ToastContainer /> {/* <-- Place it here once, near the root */}
+
       {/* Hero Section */}
       <section
         className="relative bg-cover bg-center h-[400px]"
@@ -77,7 +87,7 @@ const HomePage: React.FC = () => {
               <h3 className="text-xl font-semibold text-gray-800 mb-2">{job.title}</h3>
               <p className="text-sm text-gray-600 mb-2">{job.description}</p>
               <p className="text-sm text-gray-500 italic mb-4">Publié le : {job.date}</p>
-              <button  onClick={handlePost}  className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 font-semibold">
+              <button onClick={handlePost} className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 font-semibold">
                 Postulez maintenant
               </button>
             </div>
@@ -114,7 +124,7 @@ const HomePage: React.FC = () => {
               ✕
             </button>
             <h2 className="text-xl font-bold mb-4 text-gray-800">Demande de devis</h2>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleFormSubmit}>
               <input
                 type="text"
                 placeholder="Votre nom"
@@ -162,7 +172,6 @@ const ServiceCard = ({
       <h3 className="text-xl font-semibold mb-2 text-red-700">{title}</h3>
       <p className="text-sm text-gray-600">{description}</p>
     </div>
-    <ToastContainer/>
   </div>
 );
 
