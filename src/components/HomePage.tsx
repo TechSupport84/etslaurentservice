@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 
 const HomePage: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,6 +19,9 @@ const HomePage: React.FC = () => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
+  const handlePost = ()=>{
+    toast.success("Coming soon...")
+  }
   return (
     <div className="bg-white text-gray-800">
       {/* Hero Section */}
@@ -73,7 +77,7 @@ const HomePage: React.FC = () => {
               <h3 className="text-xl font-semibold text-gray-800 mb-2">{job.title}</h3>
               <p className="text-sm text-gray-600 mb-2">{job.description}</p>
               <p className="text-sm text-gray-500 italic mb-4">Publié le : {job.date}</p>
-              <button className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 font-semibold">
+              <button  onClick={handlePost}  className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 font-semibold">
                 Postulez maintenant
               </button>
             </div>
@@ -158,6 +162,7 @@ const ServiceCard = ({
       <h3 className="text-xl font-semibold mb-2 text-red-700">{title}</h3>
       <p className="text-sm text-gray-600">{description}</p>
     </div>
+    <ToastContainer/>
   </div>
 );
 
